@@ -12,7 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IDbService, DbService>();
 builder.Services.AddDbContext<DatabaseContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MsSQL"));
 });
 
 var app = builder.Build();

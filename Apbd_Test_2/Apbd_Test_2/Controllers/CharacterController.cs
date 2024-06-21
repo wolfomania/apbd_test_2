@@ -26,13 +26,11 @@ namespace Apbd_Test_2.Controllers
                 currentWeight = character.CurrentWei,
                 maxWeight = character.MaxWeight,
                 backpackItems = character.Backpacks
-                    .Select(backpacks => backpacks.Items)
-                    .GroupBy(items => items.Id)
-                    .Select(group => new
+                    .Select(backpacks => new 
                     {
-                        itemName = group.First().Name,
-                        itemWeight = group.First().Weight,
-                        amount = group.Count()
+                        itemName = backpacks.Items.Name,
+                        itemWeight = backpacks.Items.Weight,
+                        amount = backpacks.Amount
                     }),
                 titles = character.CharacterTitles
                     .Select(characterTitles => new
@@ -57,10 +55,10 @@ namespace Apbd_Test_2.Controllers
             
             foreach (var addItemReq in addItemsReq)
             {
-                totalWeight += addItemReq.Amount;
                 if (!await dbService.DoesItemExist(addItemReq.ItemId))
                     return NotFound($"No Item with id: {addItemReq.ItemId}");
-                
+                var item = await dbService.GetItemById(addItemReq.ItemId);
+                totalWeight += item.Weight * addItemReq.Amount;
             }
 
             if (character.CurrentWei + totalWeight > character.MaxWeight)
@@ -93,7 +91,7 @@ namespace Apbd_Test_2.Controllers
                     };
                     item.Backpacks.Add(backpack);
                     character.Backpacks.Add(backpack);
-                    await dbService.UpdateBackpack(backpack);
+                    await dbService.AddBackpackItem(backpack);
                     await dbService.UpdateItem(item);
                     
                     updatedBackpacks.Add(backpack);

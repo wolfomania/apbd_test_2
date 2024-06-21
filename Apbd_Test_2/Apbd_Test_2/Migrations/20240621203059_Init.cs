@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Apbd_Test_2.Migrations
 {
     /// <inheritdoc />
@@ -102,6 +104,55 @@ namespace Apbd_Test_2.Migrations
                         principalTable: "Titles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Characters",
+                columns: new[] { "Id", "CurrentWei", "FirstName", "LastName", "MaxWeight" },
+                values: new object[,]
+                {
+                    { 1, 21, "John", "Yakuza", 200 },
+                    { 2, 12, "Jane", "Doe", 200 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Items",
+                columns: new[] { "Id", "Name", "Weight" },
+                values: new object[,]
+                {
+                    { 1, "Item1", 10 },
+                    { 2, "Item2", 11 },
+                    { 3, "Item3", 12 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Titles",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Title1" },
+                    { 2, "Title2" },
+                    { 3, "Title3" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Backpacks",
+                columns: new[] { "CharacterId", "ItemId", "Amount" },
+                values: new object[,]
+                {
+                    { 1, 1, 2 },
+                    { 1, 2, 1 },
+                    { 2, 3, 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "character_titles",
+                columns: new[] { "CharacterId", "TitleId", "AcquiredAt" },
+                values: new object[,]
+                {
+                    { 1, 1, new DateTime(2024, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 1, 2, new DateTime(2024, 6, 9, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, 3, new DateTime(2024, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.CreateIndex(

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Apbd_Test_2.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240621164700_Init")]
+    [Migration("20240621203059_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -41,6 +41,26 @@ namespace Apbd_Test_2.Migrations
                     b.HasIndex("ItemId");
 
                     b.ToTable("Backpacks");
+
+                    b.HasData(
+                        new
+                        {
+                            CharacterId = 1,
+                            ItemId = 1,
+                            Amount = 2
+                        },
+                        new
+                        {
+                            CharacterId = 1,
+                            ItemId = 2,
+                            Amount = 1
+                        },
+                        new
+                        {
+                            CharacterId = 2,
+                            ItemId = 3,
+                            Amount = 1
+                        });
                 });
 
             modelBuilder.Entity("Apbd_Test_2.Models.Domain.CharacterTitles", b =>
@@ -59,6 +79,26 @@ namespace Apbd_Test_2.Migrations
                     b.HasIndex("TitleId");
 
                     b.ToTable("character_titles");
+
+                    b.HasData(
+                        new
+                        {
+                            CharacterId = 1,
+                            TitleId = 1,
+                            AcquiredAt = new DateTime(2024, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            CharacterId = 1,
+                            TitleId = 2,
+                            AcquiredAt = new DateTime(2024, 6, 9, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            CharacterId = 2,
+                            TitleId = 3,
+                            AcquiredAt = new DateTime(2024, 6, 8, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Apbd_Test_2.Models.Domain.Characters", b =>
@@ -86,6 +126,24 @@ namespace Apbd_Test_2.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Characters");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CurrentWei = 21,
+                            FirstName = "John",
+                            LastName = "Yakuza",
+                            MaxWeight = 200
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CurrentWei = 12,
+                            FirstName = "Jane",
+                            LastName = "Doe",
+                            MaxWeight = 200
+                        });
                 });
 
             modelBuilder.Entity("Apbd_Test_2.Models.Domain.Items", b =>
@@ -106,6 +164,26 @@ namespace Apbd_Test_2.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Items");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Item1",
+                            Weight = 10
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Item2",
+                            Weight = 11
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Item3",
+                            Weight = 12
+                        });
                 });
 
             modelBuilder.Entity("Apbd_Test_2.Models.Domain.Titles", b =>
@@ -123,6 +201,23 @@ namespace Apbd_Test_2.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Titles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Title1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Title2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Title3"
+                        });
                 });
 
             modelBuilder.Entity("Apbd_Test_2.Models.Domain.Backpacks", b =>
