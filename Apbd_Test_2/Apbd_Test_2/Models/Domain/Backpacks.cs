@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Apbd_Test_2.Models.Domain;
 
+[PrimaryKey(nameof(CharacterId), nameof(ItemId))]
 public class Backpacks
 {
     public int CharacterId { get; set; }

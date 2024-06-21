@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Apbd_Test_2.Models.Domain;
 
 
 [Table("character_titles")]
+[PrimaryKey(nameof(CharacterId), nameof(TitleId))]
 public class CharacterTitles
 {
     public int CharacterId { get; set; }
